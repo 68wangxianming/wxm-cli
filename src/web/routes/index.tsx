@@ -1,52 +1,44 @@
-import * as React from 'react';
-import {Route, Switch, RouteProps, Redirect} from 'react-router-dom';
+import Demo from '@components/Demo';
 import Home from '@components/Home';
-import Loading from '@components/Loading';
-import NotFound from '@components/NotFound';
-
-const {lazy, Suspense} = React;
+import Loading from '@components/Lib/Loading';
+import React, { Suspense } from 'react';
+import { Route, RouteProps, Switch } from 'react-router-dom';
 
 interface YDProps extends RouteProps {
-  auth?: boolean;
+  auth?: string;
 }
 
-export const routes: YDProps[] = [
+// render?: (props: RouteComponentProps<any>) => React.ReactNode;
+// children?: ((props: RouteChildrenProps<any>) => React.ReactNode) | React.ReactNode;
+const routesArr: YDProps[] = [
   {
+    component: Home,
     path: '/',
     exact: true,
-    component: Home,
-    auth: true,
-  }
+  },
+  {
+    component: Demo,
+    path: '/demos/:id',
+    exact: true,
+  },
 ];
 
-// 对状态属性进行监听
-const Routes = (token: string) => (
-  <Suspense fallback={<Loading/>}>
+const Routes = () => (
+  <Suspense fallback={<Loading />}>
     <Switch>
-      {routes.map((r, index) => {
-        const {path, exact, component} = r;
-        const LazyCom = component;
+      {routesArr.map((r, index) => {
+        console.log('[ 🍊 ]', index);
+        const { component, path, exact } = r;
+        const LazyCom = component!;
         return (
           <Route
             key={index}
             path={path}
             exact={exact}
-            render={(props) => (!r.auth ? (
-              <LazyCom {...props} />
-            ) : token ? (
-              <LazyCom {...props} />
-            ) : (
-              <Redirect
-                to={{
-                  pathname: '/login',
-                  state: {from: props.location},
-                }}
-              />
-            ))}
+            render={(props) => <LazyCom {...props} />}
           />
         );
       })}
-      <Route component={NotFound}/>
     </Switch>
   </Suspense>
 );

@@ -1,19 +1,18 @@
-import React, { FC } from 'react';
-import './home.css';
-import { NavLink, Link } from 'react-router-dom';
+import BooksPage from '@components/BooksPage/BooksPage';
+import React from 'react';
+import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 
-const Home = () => {
+const Home: FC<{}> = () => {
   return (
-    <div className="components-home">
+    <>
       <span>
-        <NavLink to="/login">登录页</NavLink>
+        <NavLink to="demos/1/">测试页</NavLink>
       </span>
-      <h2 data-testid="js-h2">京程一灯</h2>
-      <ul data-testid="js-ul">
-        <li>JavaScript</li>
-        <li>CSS</li>
-      </ul>
-    </div>
+      <h2>京程一灯🏮</h2>
+      <hr />
+      <BooksPage />
+    </>
   );
 };
 export default Home;

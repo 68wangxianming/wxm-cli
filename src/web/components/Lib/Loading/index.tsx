@@ -1,9 +1,8 @@
-import "./loading.css";
-import * as React from "react";
+import React from 'react';
 const Loading = () => {
   return (
     <>
-      <div className="components-loading">
+      <div>
         <span>加载中...</span>
       </div>
     </>

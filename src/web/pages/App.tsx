@@ -1,11 +1,11 @@
-import React from 'react';
-import routes from '@routes/index';
+import React, { FC } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-const App = () => {
+import routes from '../routes/index';
+const App: FC = () => {
   return (
     <RecoilRoot>
-      <Router basename="/">{routes('true')}</Router>
+      <Router basename="/">{routes()}</Router>
     </RecoilRoot>
   );
 };
