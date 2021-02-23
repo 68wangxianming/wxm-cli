@@ -1,10 +1,12 @@
-const {resolve} = require('path');
+/**
+ * @type {import('webpack').Configuration}
+ */
+const { resolve } = require('path');
 const merge = require('webpack-merge');
 const argv = require('yargs-parser')(process.argv.slice(2));
 const _mode = argv.mode || 'development';
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const WebpackBar = require('webpackbar');
-
 const webpackBaseConfig = {
   cache: {
     type: 'filesystem',
@@ -15,54 +17,24 @@ const webpackBaseConfig = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx|ts|tsx)$/,
-      //   exclude: /(node_modules|bower_components)/,
-      //   use: {
-      //     loader: 'swc-loader',
-      //   },
-      // },
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        include: [resolve('src')],
+        exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
+          loader: 'swc-loader',
         },
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-          },
-        ]
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|eot|woff|woff2|ttf|svg|otf)$/,
-        type: 'asset',
       },
     ],
   },
   resolve: {
     alias: {
-      '@assets': resolve('src/web/assets'),
       '@components': resolve('src/web/components'),
-      '@models': resolve('src/web/models'),
-      '@routes': resolve('src/web/routes'),
-      '@pages': resolve('src/web/pages'),
-      '@utils': resolve('src/web/utils'),
-      '@tools': resolve('src/web/tools'),
+      '@atoms': resolve('src/web/recoil/atoms'),
+      '@selectors': resolve('src/web/recoil/selectors'),
     },
-    modules: ['node_modules', resolve('src')],
     extensions: ['.js', '.ts', '.tsx', 'jsx'],
   },
   plugins: [new WebpackBar()],
-}
+};
 
-module.exports = merge.default(webpackBaseConfig, _mergeConfig)
+module.exports = merge.default(webpackBaseConfig, _mergeConfig);

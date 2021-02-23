@@ -1,0 +1,17 @@
+京程一灯React脚手架:
+  ☐ 🏮Todos:
+    React + TypeScript + Jest + Reocil + Webpack5 + E2e
+    New:
+      ☐ 完成整个测试体系包含单元测试+E2E测试  @critical
+      ☐ 项目细节问题完善一下整体运行流程
+      ☐ 完成webpack生产环境的具体配置（CSS Next深入使用）@low @started(21-01-31 17:46)
+    Done:
+      ✔ 完成Recoil状态管理机制是实现组件的通用 @critical @done(21-01-31 17:46)
+      ✔ 完成Docs相关文档的生成 @high @done(21-01-31 17:46)
+      ✔ React基础环境的搭建 @today @done(21-01-30 17:17)
+      ✔ 对应的测试环境的开发搭建  @today @done(21-01-30 17:18)
+    Cancelled:
+      ✘ 现在的一个SDK (lerna mororepo)
+      ✘ 将现有的前端项目集合进Node
+      ✘ 手写一个帮助开发团队的CLI
+      ✘ 结合ServerLess
