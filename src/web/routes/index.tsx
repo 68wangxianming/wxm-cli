@@ -1,6 +1,7 @@
 import Demo from '@components/Demo';
 import Home from '@components/Home';
 import Loading from '@components/Lib/Loading';
+import Storage from '@components/HooksDemo/Storage';
 import React, { Suspense } from 'react';
 import { Route, RouteProps, Switch } from 'react-router-dom';
 
@@ -19,6 +20,11 @@ const routesArr: YDProps[] = [
   {
     component: Demo,
     path: '/demos/:id',
+    exact: true,
+  },
+  {
+    component: Storage,
+    path: '/store',
     exact: true,
   },
 ];
