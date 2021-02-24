@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {tuplify} from "../tools"
 
 function useLocalStorage<T>(key: string, initialValue: T) {
   const [storeValue, setStoreValue] = useState<T>(() => {
@@ -21,7 +22,8 @@ function useLocalStorage<T>(key: string, initialValue: T) {
       console.log(e);
     }
   }
-  return [storeValue, setValue] as const;
+  // return [storeValue, setValue] as const;
+  return tuplify(storeValue, setValue);
 }
 
 export default useLocalStorage;
