@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
-import {tuplify} from "../tools";
+import {tuplify} from "../tools/";
 
-export function useFetch(requst: RequestInfo, init?: RequestInit) {
+export function useFetch(request: RequestInfo, init?: RequestInit) {
   const [response, setResponse] = useState<null | Response>();
   const [error, setError] = useState<null | Error>();
   const [isLoading, setIsLoading] = useState(false);
@@ -10,12 +10,12 @@ export function useFetch(requst: RequestInfo, init?: RequestInit) {
     setIsLoading(true);
     (async () => {
       try {
-        const response = await fetch(requst, {
+        const response = await fetch(request, {
           ...init,
-          signal: abortController.signal
-        })
+          signal: abortController.signal,
+        });
         setResponse(await response?.json());
-        setIsLoading(false)
+        setIsLoading(false);
       } catch (e) {
         // e is AbortError
         if (e.name === "AbortError") {
@@ -28,6 +28,6 @@ export function useFetch(requst: RequestInfo, init?: RequestInit) {
     return () => {
       abortController.abort();
     };
-  }, [init, requst]);
-  tuplify(response, error, isLoading)
+  }, [init, request]);
+  return tuplify(response, error, isLoading);
 }
